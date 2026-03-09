@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Fish Predictor PRO v4</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div>
+        <div class="brand">Fish Predictor PRO v4</div>
+        <div class="subbrand">Forecast 48 jam • Solunar • Moon Phase • Spot Favorit</div>
+      </div>
+      <div id="statusPill" class="status-pill">Siap</div>
+    </header>
+
+    <section class="controls">
+      <div class="search-row">
+        <input id="locationInput" type="text" placeholder="Cari kota, waduk, pantai, spot mancing" />
+        <button id="searchBtn">Cari</button>
+        <button id="gpsBtn" class="btn-secondary">GPS</button>
+      </div>
+
+      <div class="select-row">
+        <div class="field">
+          <label>Target ikan</label>
+          <select id="speciesSelect">
+            <option value="general">Umum</option>
+            <option value="nila">Nila</option>
+            <option value="lele">Lele</option>
+            <option value="patin">Patin</option>
+            <option value="gabus">Gabus</option>
+            <option value="kakap">Kakap</option>
+            <option value="tuna">Tuna</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Tipe perairan</label>
+          <select id="waterTypeSelect">
+            <option value="freshwater">Air tawar</option>
+            <option value="brackish">Payau</option>
+            <option value="saltwater">Laut</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-wrap">
+      <div id="map"></div>
+      <div class="map-actions">
+        <button id="saveSpotBtn">Simpan Spot</button>
+      </div>
+    </section>
+
+    <main class="panel">
+      <section class="hero-card">
+        <div class="hero-top">
+          <div>
+            <div class="label">Aktivitas ikan sekarang</div>
+            <div class="score-wrap">
+              <div id="score" class="score">--</div>
+              <div>
+                <div id="verdict" class="verdict">Menunggu data</div>
+                <div id="spotName" class="muted">Belum ada lokasi dipilih</div>
+              </div>
+            </div>
+          </div>
+          <div class="hero-badges">
+            <span id="bestWindowBadge" class="badge">Jam terbaik --</span>
+            <span id="pressureBadge" class="badge">Tekanan --</span>
+            <span id="moonBadge" class="badge">Bulan --</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="tabbar">
+        <button class="tab active" data-tab="ringkasan">Ringkasan</button>
+        <button class="tab" data-tab="forecast">48 Jam</button>
+        <button class="tab" data-tab="spots">Spot</button>
+      </div>
+
+      <section id="tab-ringkasan" class="tabcontent active">
+        <div class="grid2">
+          <div class="card">
+            <div class="card-title">Faktor utama</div>
+            <div id="factorList"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Kondisi sekarang</div>
+            <div id="currentDetail"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">Grafik aktivitas 48 jam</div>
+          <canvas id="activityChart" height="170"></canvas>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <div class="card-title">Waktu potensial terbaik</div>
+            <div id="bestHoursList"></div>
+          </div>
+          <div class="card">
+            <div class="card-title">Solunar & bulan</div>
+            <div id="solunarInfo"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tab-forecast" class="tabcontent">
+        <div class="card">
+          <div class="card-title">Forecast aktivitas 48 jam</div>
+          <div id="hourlyTable" class="hourly-table"></div>
+        </div>
+      </section>
+
+      <section id="tab-spots" class="tabcontent">
+        <div class="card">
+          <div class="card-title">Spot favorit</div>
+          <div id="savedSpots"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
